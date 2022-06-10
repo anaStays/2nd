@@ -136,6 +136,12 @@ public class Calculator {
         return Info.SPACE;
     }
 
+    /**
+     * Подготавливает выражение к вычислению, ищет переменные и запрашивает их у пользователя
+     * @param exp Математическое выражение
+     * @param scan Объект сканнера
+     * @return Вычисленное выражение
+     */
     public float calculation(String exp,Scanner scan)
     {
         //Prepare for processing
@@ -144,8 +150,23 @@ public class Calculator {
 
         String Names[] = new String[countVars(exp)];
         int countNames = 0;
-        float varNum[] = new float[countVars(exp)];
+        float Num[] = new float[countVars(exp)];
+
+        for(int i=0; i < exp.length(); ++i){
+            if(charCheck(exp.charAt(i))==Info.VARIABLE)
+            {
+                VariableSkipper(i, exp);
+            }
+        }
 
         return 0.0f;
+    }
+
+    int VariableSkipper(int i, String exp){
+        int j=i;
+        while(charCheck(exp.charAt(j))==Info.VARIABLE)
+            j++;
+
+        return j;
     }
 }
